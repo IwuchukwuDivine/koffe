@@ -1,37 +1,50 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text } from 'react-native'
+import React from 'react'
+import { Tabs } from 'expo-router'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Fontisto from '@expo/vector-icons/Fontisto';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const AppLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-      }}>
+        tabBarActiveTintColor: '#D17842',
+        tabBarInactiveTintColor: '#4E5053',
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: '#0C0F14',
+          borderColor: '#0C0F14',
+          borderTopWidth: 0
+        }
+      }}
+      >
       <Tabs.Screen
-        name="index"
+        name="Home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+          tabBarIcon: ({ focused }) => <MaterialIcons name="home" size={28} color={focused ? '#D17842' : '#4E5053'} />,
         }}
-      />
+       />
       <Tabs.Screen
-        name="explore"
+        name="Cart"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          tabBarIcon: ({ focused }) => <MaterialIcons name="shopping-bag" size={24} color={focused ? '#D17842' : '#4E5053'} />
         }}
-      />
+         />
+      <Tabs.Screen
+        name="Favourites"
+        options={{
+          tabBarIcon: ({ focused }) => <Fontisto name="heart" size={20} color={focused ? '#D17842' : '#4E5053'} />
+        }}
+       />
+      <Tabs.Screen
+        name="Notification"
+        options={{
+          tabBarIcon: ({ focused }) => <MaterialIcons name="notifications" size={28} color={focused ? '#D17842' : '#4E5053'} />
+        }}
+       />
     </Tabs>
-  );
+  )
 }
+
+export default AppLayout
